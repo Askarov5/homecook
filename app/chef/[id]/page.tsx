@@ -163,11 +163,30 @@ const getChefData = async (id: string): Promise<Chef> => {
     ],
     subscribed: false,
     additionalServices: [{
-      inHomeCooking: true,
-      privateEvents: true,
-      cookingLessons: false,
-      dietaryPlanning: true,
-      groceryShopping: false,
+      title: "In-Home Cooking & Meal Prep",
+      description: "Enjoy fresh, personalized meals cooked right in your kitchen or pre-prepared for later consumption.",
+      details: [
+        "Cook using your groceries or chef-provided ingredients",
+        "Prepare and package meals tailored to your dietary needs"
+      ],
+      conditions: "Minimum 3-hour booking",
+      pricing: "Starting at $50/hour",
+      availability: "Available 7 days a week",
+      id: '',
+      type: 'inHomeCooking'
+    },{
+      title: "Private Events & Dinner Parties",
+      description: "Elevate your gatherings with personalized culinary experiences for special occasions.",
+      details: [
+        "Customized menu planning for your event",
+        "On-site cooking and serving",
+        "Clean-up services included"
+      ],
+      conditions: "Minimum 6 guests",
+      pricing: "Starting at $75 per person",
+      availability: "Booking required 2 weeks in advance",
+      id: '',
+      type: 'privateEvents'
     }],
   }
 }

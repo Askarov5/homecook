@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Home, ChefHat, ShoppingBag, Star, Settings, LogOut, Menu, Utensils, CalendarRange } from 'lucide-react'
+import { Home, ChefHat, ShoppingBag, Star, Settings, LogOut, Menu, Utensils, CalendarRange, HandPlatter, Hand } from 'lucide-react'
 import { NotificationComponent } from './NotificationComponent'
 
 const navItems = [
@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Profile', href: '/dashboard/profile', icon: ChefHat },
   { name: 'Menu', href: '/dashboard/menu', icon: Utensils },
   { name: 'Orders', href: '/dashboard/orders', icon: ShoppingBag },
+  { name: 'Additional Services', href: '/dashboard/additional-services', icon: HandPlatter },
   { name: 'Bookings', href: '/dashboard/bookings', icon: CalendarRange },
   { name: 'Reviews', href: '/dashboard/reviews', icon: Star },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },

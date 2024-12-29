@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { AdditionalServices } from './components/AdditionalServices'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"

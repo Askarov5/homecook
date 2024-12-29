@@ -29,6 +29,7 @@ const defaultItem: MenuItem = {
   dietaryRestrictions: [],
   available: false,
   notes: '',
+  availablePortions: 0,
 }
 
 export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps) {
@@ -59,7 +60,15 @@ export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps)
   }
 
   const handleSwitchChange = (name: string) => (checked: boolean) => {
-    setFormData(prev => ({ ...prev, [name]: checked }))
+    if (name === 'available') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: checked,
+        availablePortion: checked ? prev.minPortions : 0
+      }))
+    } else {
+      setFormData(prev => ({ ...prev, [name]: checked }))
+    }
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,47 +162,47 @@ export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps)
           </div>
           <div className="space-y-2">
             <Label htmlFor="price">Price</Label>
-            <Input 
-              id="price" 
-              name="price" 
-              type="number" 
-              min="0" 
-              step="0.01" 
-              value={formData.price} 
-              onChange={handleNumberInputChange} 
-              required 
+            <Input
+              id="price"
+              name="price"
+              type="number"
+              min="0"
+              step="0.01"
+              value={formData.price}
+              onChange={handleNumberInputChange}
+              required
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="minPortions">Minimum Order Quantity</Label>
-            <Input 
-              id="minPortions" 
-              name="minPortions" 
-              type="number" 
-              min="1" 
-              value={formData.minPortions} 
-              onChange={handleNumberInputChange} 
-              required 
+            <Input
+              id="minPortions"
+              name="minPortions"
+              type="number"
+              min="1"
+              value={formData.minPortions}
+              onChange={handleNumberInputChange}
+              required
             />
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="description">Description</Label>
-          <Textarea 
-            id="description" 
-            name="description" 
-            value={formData.description} 
-            onChange={handleInputChange} 
+          <Textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
           />
         </div>
         <div className="space-y-2">
           <Label htmlFor="ingredients">Ingredients</Label>
           <div className="flex space-x-2">
-            <Input 
-              id="newIngredient" 
-              value={newIngredient} 
-              onChange={(e) => setNewIngredient(e.target.value)} 
-              placeholder="Add an ingredient" 
+            <Input
+              id="newIngredient"
+              value={newIngredient}
+              onChange={(e) => setNewIngredient(e.target.value)}
+              placeholder="Add an ingredient"
             />
             <Button type="button" onClick={handleAddIngredient}>Add</Button>
           </div>
@@ -216,11 +225,11 @@ export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps)
         </div>
         <div className="space-y-2">
           <Label htmlFor="dietaryRestrictions">Dietary Restrictions/Allergens</Label>
-          <Input 
-            id="dietaryRestrictions" 
-            name="dietaryRestrictions" 
-            value={formData.dietaryRestrictions?.join(', ')} 
-            onChange={(e) => setFormData(prev => ({ ...prev, dietaryRestrictions: e.target.value.split(',').map(item => item.trim()) }))} 
+          <Input
+            id="dietaryRestrictions"
+            name="dietaryRestrictions"
+            value={formData.dietaryRestrictions.join(', ')}
+            onChange={(e) => setFormData(prev => ({ ...prev, dietaryRestrictions: e.target.value.split(',').map(item => item.trim()) }))}
           />
         </div>
         <div className="space-y-2">
@@ -229,23 +238,41 @@ export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps)
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Switch id="available" checked={formData.available} onCheckedChange={handleSwitchChange('available')} />
+            <Switch
+              id="available"
+              checked={formData.available}
+              onCheckedChange={handleSwitchChange('available')}
+            />
             <Label htmlFor="available">Available today</Label>
           </div>
           {formData.available && (
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="discount">Discount (%)</Label>
-              <Input
-                id="discount"
-                name="discount"
-                type="number"
-                min="0"
-                max="100"
-                value={formData.discount || ''}
-                onChange={handleNumberInputChange}
-                className="w-20"
-              />
-            </div>
+            <>
+              <div className="flex items-center space-y-2">
+                <Label htmlFor="availablePortion">Available Portions</Label>
+                <Input
+                  id="availablePortion"
+                  name="availablePortion"
+                  type="number"
+                  min="0"
+                  value={formData.availablePortions}
+                  onChange={handleNumberInputChange}
+                  required
+                />
+              </div>
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="discount">Discount (%)</Label>
+                <Input
+                  id="discount"
+                  name="discount"
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={formData.discount || ''}
+                  onChange={handleNumberInputChange}
+                  className="w-20"
+                />
+              </div>
+            </>
           )}
         </div>
       </div>

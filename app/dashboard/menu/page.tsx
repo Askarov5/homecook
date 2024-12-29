@@ -97,6 +97,14 @@ export default function MenuPage() {
     handleCloseForm()
   }
 
+  const handleUpdateAvailability = (id: number, available: boolean, availablePortion: number) => {
+    setMenuItems(prevItems => 
+      prevItems.map(item => 
+        item.id === id ? { ...item, available, availablePortion } : item
+      )
+    );
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Menu Management</h1>
@@ -111,7 +119,21 @@ export default function MenuPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <MenuOverview menuItems={menuItems} onEditItem={handleEditItem} />
+            <MenuOverview 
+              menuItems={menuItems} 
+              onEditItem={handleEditItem} 
+              onUpdateAvailability={handleUpdateAvailability}
+              onUpdateAvailablePortion={(id, availablePortion) => {
+                setMenuItems(prevItems => 
+                  prevItems.map(item => 
+                    item.id === id ? { ...item, availablePortion } : item
+                  )
+                );
+              }}
+              onDeleteItem={(id) => {
+                setMenuItems(prevItems => prevItems.filter(item => item.id !== id));
+              }}
+            />
           </CardContent>
         </Card>
 

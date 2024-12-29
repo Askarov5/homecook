@@ -2,32 +2,44 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Switch } from "@/components/ui/switch"
+import { Input } from "@/components/ui/input"
 import { Edit, Trash2 } from 'lucide-react'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { MenuItem } from '@/app/types'
+import { useState } from 'react'
 
 interface MenuOverviewProps {
   menuItems: MenuItem[]
   onEditItem: (item: MenuItem) => void
+  onDeleteItem: (id: number) => void
+  onUpdateAvailability: (id: number, available: boolean, availablePortion: number) => void
+  onUpdateAvailablePortion: (id: number, availablePortion: number) => void
 }
 
-export function MenuOverview({ menuItems, onEditItem }: MenuOverviewProps) {
-  const handleToggleAvailability = (id: number) => {
-    // Implement toggle availability logic here
-    const updatedMenuItems = menuItems.map(item => 
-      item.id === id ? { ...item, available: !item.available } : item
-    );
-    // Assuming you have a way to update the menuItems state from outside this component.  This would likely involve a prop or context.
-    // For this example, we'll just console log the updated state.  In a real application, you would update the state appropriately.
-    console.log("Updated Menu Items:", updatedMenuItems);
+export function MenuOverview({ menuItems, onEditItem, onDeleteItem, onUpdateAvailability, onUpdateAvailablePortion }: MenuOverviewProps) {
+  const [editingPortionId, setEditingPortionId] = useState<number | null>(null);
 
+  const handleToggleAvailability = (id: number, available: boolean) => {
+    const item = menuItems.find(item => item.id === id);
+    if (item) {
+      const updatedItem = {
+        ...item,
+        available,
+        availablePortion: available ? item.minPortions : 0
+      };
+      onUpdateAvailability(id, available, updatedItem.availablePortion);
+    }
   }
 
-  const handleDeleteItem = (id: number) => {
-    // Implement delete item logic here
-    // Assuming you have a way to update the menuItems state from outside this component.  This would likely involve a prop or context.
-    // For this example, we'll just console log the updated state.  In a real application, you would update the state appropriately.
-    console.log("Deleted Item with ID:", id);
+  const handlePortionChange = (id: number, value: string) => {
+    const portion = parseInt(value, 10);
+    if (!isNaN(portion) && portion >= 0) {
+      onUpdateAvailablePortion(id, portion);
+    }
+  }
+
+  const handlePortionBlur = () => {
+    setEditingPortionId(null);
   }
 
   return (
@@ -39,11 +51,12 @@ export function MenuOverview({ menuItems, onEditItem }: MenuOverviewProps) {
           <TableHead>Category</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Available</TableHead>
+          <TableHead>Portions</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {menuItems.map(item => (
+        {menuItems.map((item) => (
           <TableRow key={item.id} className={item.available ? '' : 'opacity-50'}>
             <TableCell>
               <Image
@@ -65,8 +78,26 @@ export function MenuOverview({ menuItems, onEditItem }: MenuOverviewProps) {
             <TableCell>
               <Switch
                 checked={item.available}
-                onCheckedChange={() => handleToggleAvailability(item.id)}
+                onCheckedChange={(checked) => handleToggleAvailability(item.id, checked)}
               />
+            </TableCell>
+            <TableCell>
+              {item.available ? (
+                editingPortionId === item.id ? (
+                  <Input
+                    type="number"
+                    value={item.availablePortions}
+                    onChange={(e) => handlePortionChange(item.id, e.target.value)}
+                    onBlur={handlePortionBlur}
+                    className="w-20"
+                    min={0}
+                  />
+                ) : (
+                  <span onClick={() => setEditingPortionId(item.id)}>{item.availablePortions}</span>
+                )
+              ) : (
+                <span className="text-gray-400">N/A</span>
+              )}
             </TableCell>
             <TableCell>
               <div className="flex space-x-2">
@@ -88,7 +119,7 @@ export function MenuOverview({ menuItems, onEditItem }: MenuOverviewProps) {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleDeleteItem(item.id)}>
+                      <AlertDialogAction onClick={() => onDeleteItem(item.id)}>
                         Delete
                       </AlertDialogAction>
                     </AlertDialogFooter>

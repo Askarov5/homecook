@@ -43,6 +43,7 @@ export interface MenuItem {
   category: string;
   discount?: number;
   available: boolean;
+  availablePortions?: number;
   cuisineType: string;
   dietaryRestrictions?: string[];
   notes: string;

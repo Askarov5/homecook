@@ -18,8 +18,8 @@ export interface Chef {
   cateringServices: string;
   subscribed?: boolean;
   cuisines: string[];
-  isDeliveryAvailable: false,
-  deliveryConditions: '',
+  isDeliveryAvailable: boolean,
+  deliveryConditions: string,
   additionalServices: AdditionalService[];
   customerReviews: Review[];
   socialMedia: {
@@ -87,6 +87,8 @@ export interface User {
   };
 }
 
+export type PaymentStatus = 'paid' | 'unpaid' | 'cancelled';
+
 export interface Order {
   id: string;
   customerName: string;
@@ -100,7 +102,7 @@ export interface Order {
   totalPrice: number;
   orderDate: Date;
   status: OrderStatus;
-  paymentStatus: 'Paid' | 'Unpaid' | 'Cancelled';
+  paymentStatus: PaymentStatus;
   dietaryComments?: string;
   cancellationReason?: string;
   estimatedReadyDateTime: Date; // Added this field
@@ -117,6 +119,8 @@ export interface FilterPanelProps {
   };
 }
 
+export type BookingStatus = 'new' | 'approved' | 'denied' | 'inProgress' | 'completed';
+
 export interface BookingRequest {
   id: string
   serviceType: string
@@ -128,7 +132,7 @@ export interface BookingRequest {
   eventDate: Date
   details: string
   requestDate: Date
-  status: 'New' | 'Approved' | 'Denied' | 'In Progress' | 'Completed'
+  status: BookingStatus
 }
 
 export type ServiceType = 'inHomeCooking' | 'privateEvents' | 'cookingLessons' | 'dietaryPlanning' | 'groceryShopping' | 'catering';

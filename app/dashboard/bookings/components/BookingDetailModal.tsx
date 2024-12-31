@@ -5,7 +5,7 @@ import { formatDateTime } from '@/lib/utils'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface BookingDetailModalProps {
-  booking: BookingRequest & { status: 'New' | 'Approved' | 'Denied' | 'In Progress' | 'Completed' }
+  booking: BookingRequest
   onClose: () => void
   onStatusChange: (bookingId: string, newStatus: string) => void
 }

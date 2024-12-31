@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { PlusCircle } from 'lucide-react'
 import { MenuOverview } from '../components/MenuOverview'
 import { AddEditMenuItem } from '../components/AddEditMenuItem'
-import { MenuItem } from '@/app/types/chef'
+import { MenuItem } from '@/app/types'
 
 const initialMenuItems: MenuItem[] = [
   {

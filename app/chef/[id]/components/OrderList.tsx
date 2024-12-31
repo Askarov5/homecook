@@ -215,7 +215,7 @@ export function OrderList({ items, onRemoveItem, onUpdateItem, minPreorderDays }
                 <Textarea
                   id="dietaryRestrictions"
                   value={editingItem.dietaryRestrictions || ''}
-                  onChange={(e) => setEditingItem({ ...editingItem, dietaryRestrictions: e.target.value })}
+                  onChange={(e) => setEditingItem({ ...editingItem, dietaryRestrictions: [e.target.value] })}
                   className="mt-1"
                 />
               </div>

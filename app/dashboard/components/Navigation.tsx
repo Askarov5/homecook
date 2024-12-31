@@ -9,7 +9,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Home, ChefHat, ShoppingBag, Star, Settings, LogOut, Menu, Utensils, CalendarRange, HandPlatter, Hand } from 'lucide-react'
 import { NotificationComponent } from './NotificationComponent'
 
-const navItems = [
+type NavItem = {
+  name: string;
+  href: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+const navItems: NavItem[] = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Profile', href: '/dashboard/profile', icon: ChefHat },
   { name: 'Menu', href: '/dashboard/menu', icon: Utensils },
@@ -68,7 +74,7 @@ export function Navigation() {
   )
 }
 
-function MobileNav({ navItems, pathname }: { navItems: typeof navItems, pathname: string }) {
+function MobileNav({ navItems, pathname }: { navItems: NavItem[], pathname: string }) {
   return (
     <ScrollArea className="h-full">
       <div className="p-6 flex justify-between items-center">

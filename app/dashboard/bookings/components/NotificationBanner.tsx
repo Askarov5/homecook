@@ -7,7 +7,7 @@ interface NotificationBannerProps {
 }
 
 export function NotificationBanner({ bookings }: NotificationBannerProps) {
-  const newBookingsCount = bookings.filter(booking => booking.status === 'New').length
+  const newBookingsCount = bookings.filter(booking => booking.status === 'new').length
 
   if (newBookingsCount === 0) {
     return null

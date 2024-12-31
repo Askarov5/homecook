@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BookingCard } from './BookingCard'
 import { BookingDetailModal } from './BookingDetailModal'
-import { BookingRequest } from '@/app/types'
+import { BookingRequest, BookingStatus } from '@/app/types'
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 

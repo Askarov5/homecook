@@ -71,7 +71,7 @@ export function ChefDashboard() {
           <CardTitle>Recent Reviews</CardTitle>
         </CardHeader>
         <CardContent>
-          <ReviewsList />
+          <ReviewsList  sortBy='newest'/>
         </CardContent>
       </Card>
     </div>

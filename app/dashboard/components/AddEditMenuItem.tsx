@@ -228,7 +228,7 @@ export function AddEditMenuItem({ item, onClose, onSave }: AddEditMenuItemProps)
           <Input
             id="dietaryRestrictions"
             name="dietaryRestrictions"
-            value={formData.dietaryRestrictions.join(', ')}
+            value={formData.dietaryRestrictions?.join(', ')}
             onChange={(e) => setFormData(prev => ({ ...prev, dietaryRestrictions: e.target.value.split(',').map(item => item.trim()) }))}
           />
         </div>

@@ -4,13 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Star, Flag, MessageSquare } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose, DialogDescription } from "@/components/ui/dialog"
-import { Review } from '@/app/types'
+import { Review, SortBy } from '@/app/types'
 
-interface ReviewsListProps {
-  sortBy: string
-}
-
-export function ReviewsList({ sortBy }: ReviewsListProps) {
+export function ReviewsList({ sortBy }: {sortBy: SortBy}) {
   const [reviews, setReviews] = useState<Review[]>([
     { id: 1, customerName: 'Alice Brown', rating: 5, comment: 'Delicious food and great service!', date: '2023-06-01', location: 'New York, NY', dietaryPreferences: ['Vegetarian'], ratingBreakdown: { food: 5, service: 5, value: 5 }, flagged: false },
     { id: 2, customerName: 'Bob Smith', rating: 4, comment: 'Tasty dishes, but delivery was a bit late.', date: '2023-05-28', location: 'Los Angeles, CA', dietaryPreferences: ['Gluten-free'], ratingBreakdown: { food: 5, service: 3, value: 4 }, flagged: false },

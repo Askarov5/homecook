@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProfileSection } from './ProfileSection'
 import { SocialLinks } from './SocialLinks'
 import { PortfolioManagement } from './PortfolioManagement'
@@ -18,8 +17,8 @@ export function ChefProfile() {
     phone: '+1234567890',
     location: 'New York, NY',
     bio: 'Passionate chef specializing in Italian cuisine with a modern twist.',
-    image: 'https://www.placehold.co/200x200',
-    banner: 'https://www.placehold.co/1200x400',
+    image: 'https://placehold.co/200x200',
+    banner: 'https://placehold.co/1200x400',
     socialMedia: {
       instagram: 'chefalicej',
       facebook: 'chefalicej',
@@ -66,7 +65,7 @@ export function ChefProfile() {
         onBioChange={(value) => setChef(prev => ({ ...prev, bio: value }))}
       />
 
-      <Card>
+      <Card className="bg-white">
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>
         </CardHeader>
@@ -96,19 +95,10 @@ export function ChefProfile() {
       </Card>
 
       <SocialLinks links={chef.socialMedia} onChange={handleSocialLinkChange} />
+   
+      <PortfolioManagement />
 
-      <Tabs defaultValue="portfolio">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
-          <TabsTrigger value="availability">Availability</TabsTrigger>
-        </TabsList>
-        <TabsContent value="portfolio">
-          <PortfolioManagement />
-        </TabsContent>
-        <TabsContent value="availability">
-          <AvailabilitySettings />
-        </TabsContent>
-      </Tabs>
+      <AvailabilitySettings />
     </div>
   )
 }

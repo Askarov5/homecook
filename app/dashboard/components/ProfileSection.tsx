@@ -13,7 +13,7 @@ interface ProfileSectionProps {
 
 export function ProfileSection({ profilePicture, name, location, bio, onBioChange }: ProfileSectionProps) {
   return (
-    <Card>
+    <Card className='bg-white'>
       <CardContent className="p-6">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
           <div className="relative w-32 h-32">

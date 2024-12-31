@@ -65,6 +65,13 @@ export function AvailabilitySettings() {
       if (!events.some(e => isSameDay(e.date, selectedDay))) {
         updatedEvents.push({ date: selectedDay, events: [{ ...currentEvent, id: Date.now().toString() }] });
       }
+
+      // sort events by start time
+      updatedEvents.forEach(e => e.events.sort((a, b) => {
+        const aStart = parseISO(a.start);
+        const bStart = parseISO(b.start);
+        return aStart < bStart ? -1 : aStart > bStart ? 1 : 0;
+      }));
       
       setEvents(updatedEvents);
       setIsEventDialogOpen(false);
@@ -168,7 +175,7 @@ export function AvailabilitySettings() {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
+    <Card className="w-full mx-auto bg-white">
       <CardHeader>
         <CardTitle>Set Your Unavailable Times</CardTitle>
       </CardHeader>
@@ -230,7 +237,7 @@ export function AvailabilitySettings() {
         </div>
       </CardContent>
       <Dialog open={isEventDialogOpen} onOpenChange={setIsEventDialogOpen}>
-        <DialogContent>
+        <DialogContent className='bg-white'>
           <DialogHeader>
             <DialogTitle>{isEditing ? 'Edit Unavailable Time' : 'Add Unavailable Time'}</DialogTitle>
           </DialogHeader>

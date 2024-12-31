@@ -13,7 +13,7 @@ interface SocialLinksProps {
 
 export function SocialLinks({ links, onChange }: SocialLinksProps) {
   return (
-    <Card>
+    <Card className="bg-white">
       <CardHeader>
         <CardTitle>Social Links</CardTitle>
       </CardHeader>

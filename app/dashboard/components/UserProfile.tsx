@@ -12,6 +12,7 @@ import { OrderHistory } from './OrderHistory'
 import { Favorites } from './Favorites'
 import { DietaryPreferences } from './DietaryPreferences'
 import { User } from '@/app/types'
+import { AvailabilitySettings } from './AvailabilitySettings'
 
 export function UserProfile() {
   const [user, setUser] = useState<User>({

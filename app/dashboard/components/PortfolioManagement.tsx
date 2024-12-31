@@ -36,7 +36,7 @@ export function PortfolioManagement() {
   }
 
   return (
-    <Card>
+    <Card className='bg-white'>
       <CardHeader>
         <CardTitle>Portfolio Management</CardTitle>
       </CardHeader>

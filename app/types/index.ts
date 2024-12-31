@@ -49,6 +49,8 @@ export interface MenuItem {
   notes: string;
 }
 
+export type SortBy = 'newest' | 'highest' | 'lowest' | 'helpful' | 'flagged';
+
 export interface Review {
   id: number;
   customerName: string;

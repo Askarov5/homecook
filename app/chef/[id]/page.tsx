@@ -33,6 +33,11 @@ const getChefData = async (id: string): Promise<Chef> => {
       whatsapp: "+1234567890",
       telegram: "@chef_alice"
     },
+    email: "chef.alice@example.com",
+    phone: "+1234567890",
+    cuisines: ["Italian"],
+    isDeliveryAvailable: true,
+    deliveryConditions: "Minimum order of $50.",
     portfolio: Array(10).fill("/placeholder.svg?height=160&width=160"),
     menu: [
       {
@@ -117,8 +122,7 @@ const getChefData = async (id: string): Promise<Chef> => {
         ingredients: ["Pasta Sheets", "Ground Beef", "Tomato Sauce", "Bechamel", "Mozzarella"],
         image: "/placeholder.svg?height=200&width=200&text=Lasagna",
         category: "Meals",
-        discount: 15 // 15% discount
-        ,
+        discount: 15, // 15% discount
         available: false,
         cuisineType: '',
         notes: ''

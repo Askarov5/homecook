@@ -18,8 +18,8 @@ export function ChefProfile() {
     phone: '+1234567890',
     location: 'New York, NY',
     bio: 'Passionate chef specializing in Italian cuisine with a modern twist.',
-    image: 'https://via.placeholder.com/200',
-    banner: 'https://via.placeholder.com/1200x400',
+    image: 'https://www.placehold.co/200x200',
+    banner: 'https://www.placehold.co/1200x400',
     socialMedia: {
       instagram: 'chefalicej',
       facebook: 'chefalicej',
@@ -34,6 +34,9 @@ export function ChefProfile() {
     cateringServices: '',
     customerReviews: [],
     cuisines: ['Italian'],
+    isDeliveryAvailable: true,
+    deliveryConditions: 'Free delivery for orders over $50',
+    additionalServices: [],
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
